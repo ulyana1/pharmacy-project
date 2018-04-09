@@ -57,7 +57,7 @@ public class PatientData extends DBconfig {
         
 		try {
 			Statement st = conn.createStatement();
-			String selTable = "SELECT id, name, surname FROM  patient";
+			String selTable = "SELECT id_patient, name, surname FROM  patient";
 	           st.execute(selTable);
 	           ResultSet rs = st.getResultSet();
 	           while(rs.next()){
