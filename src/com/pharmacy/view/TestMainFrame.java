@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import com.medicine.view.UpdatePriceWindow;
 import com.pharmacy.data.PharmacyDataContext;
 import com.pharmacy.entities.*;
 import com.pharmacy.view.elements.CustomTableModel;
@@ -108,6 +109,24 @@ public class TestMainFrame extends JFrame {
 			}
 		});
         
+        JButton btnUpdateMedicine = new JButton("Update medicine price"); 
+        btnUpdateMedicine.addActionListener(new ActionListener() {
+ 		  
+     	   @Override
+            public void actionPerformed(ActionEvent e) {
+                CustomTableModel.TableSelectionEventHandler<Pharmacy> selectionHandler = new TableSelectionEventHandler<Pharmacy>(){
+
+                    @Override
+                    public void handle(Pharmacy object, int row) {
+                    	new UpdatePriceWindow(object).setVisible(true);
+                    }
+                };
+                List<Pharmacy> phlist = pharmacyContext.getAllPharmacies();
+                new TableDataViewWindow<>(Pharmacy.class, phlist, selectionHandler).setVisible(true);
+            }
+     	   
+ 		});
+        
         JButton btnNewDelivery = new JButton("New delivery");
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
@@ -118,7 +137,9 @@ public class TestMainFrame extends JFrame {
         				.addComponent(btnPharmacy, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
         				.addComponent(btnReaderSearch, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(btnNewPharmacy, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        				.addComponent(btnNewDelivery, GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
+        				.addComponent(btnNewDelivery, GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+        				.addComponent(btnUpdateMedicine, GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+        					)
         			.addGap(0))
         );
         gl_contentPane.setVerticalGroup(
@@ -132,9 +153,11 @@ public class TestMainFrame extends JFrame {
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(btnNewPharmacy)
         			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnUpdateMedicine)
+        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(btnNewDelivery)
         			.addGap(112))
-        );
+        ); 
         contentPane.setLayout(gl_contentPane);
     }
 }
