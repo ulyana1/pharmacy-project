@@ -2,13 +2,15 @@ package com.accounting;
 
 import java.sql.*;
 
-public class DbUtils {
+import com.pharmacy.data.DataContext;
+
+public class DbUtils extends DataContext {
 
     private Connection connection;
 
-    public DbUtils(String hostName, String dbName, String userName, String password) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://" + hostName + "/" + dbName, userName, password);
+    public DbUtils() throws ClassNotFoundException, SQLException {
+        
+        connection = getConnection();
     }
 
 

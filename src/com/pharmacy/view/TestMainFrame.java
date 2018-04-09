@@ -94,7 +94,7 @@ public class TestMainFrame extends JFrame {
         btnReaderSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PharmacySearchWindow(pharmacyContext.getAllPharmacies()).setVisible(true);
+                new PharmacySearchWindow(pharmacyContext.getAllPharmacies(), null).setVisible(true);
             }
         });
         
@@ -128,6 +128,14 @@ public class TestMainFrame extends JFrame {
  		});
         
         JButton btnNewDelivery = new JButton("New delivery");
+        btnNewDelivery.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new NewDeliveryWindow().setVisible(true);
+			}
+		});
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
         	gl_contentPane.createParallelGroup(Alignment.LEADING)

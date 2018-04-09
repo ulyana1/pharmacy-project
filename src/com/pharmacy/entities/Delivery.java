@@ -25,16 +25,16 @@ public class Delivery {
 		return deliveryRecords;
 	}
 
-	@TableColumn(name = "Id")
+	@TableColumn(name = "Id", number = 1)
 	public int getId() {
 		return id;
 	}
-	@TableColumn(name = "Date")
+	@TableColumn(name = "Date", number = 3)
 	public Date getDate() {
 		return date;
 	}
 
-	@TableColumn(name = "Pharmacy")
+	@TableColumn(name = "Pharmacy", number = 2)
 	public Pharmacy getPharmacy() {
 		return pharmacy;
 	}

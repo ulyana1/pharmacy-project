@@ -19,7 +19,7 @@ public class PurchaseRecord {
 		return medicine;
 	}
 	
-	@TableColumn(name="medicine")
+	@TableColumn(name="medicine", number = 1)
 	public String medicineInfo(){
 		return medicine.getTitle();
 	}
@@ -27,7 +27,7 @@ public class PurchaseRecord {
 	public int getPurchaseId() {
 		return purchId;
 	}
-	@TableColumn(name="quantity")
+	@TableColumn(name="quantity", number = 2)
 	public int getQuantity() {
 		return quantity;
 	}

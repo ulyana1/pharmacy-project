@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -20,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import com.pharmacy.entities.Medicine;
 import com.pharmacy.entities.Pharmacy;
 
 public class PharmacySearchWindow extends JFrame {
@@ -27,12 +30,20 @@ public class PharmacySearchWindow extends JFrame {
     private JPanel contentPane;
     private JTextField txtReaderName;
     private List<Pharmacy> list; 
+    private NewDeliveryWindow parent;
+    private DefaultListModel<Pharmacy> model;
 
     /**
      * Create the frame.
      */
-    public PharmacySearchWindow(List<Pharmacy> phlist) {
+    public PharmacySearchWindow(List<Pharmacy> phlist, NewDeliveryWindow p) {
     	list = phlist;
+    	parent = p;
+    	init();
+    	
+    }
+    
+    private void init(){
         setTitle("Search pharmacy");
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -43,24 +54,7 @@ public class PharmacySearchWindow extends JFrame {
 
         txtReaderName = new JTextField("Search pharmacy");
         txtReaderName.setColumns(10);
-
-        txtReaderName.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtReaderName.getText().equals("Search pharmacy")) {
-                    txtReaderName.setText("");
-                    txtReaderName.setForeground(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtReaderName.getText().isEmpty()) {
-                    txtReaderName.setForeground(Color.GRAY);
-                    txtReaderName.setText("Search pharmacy");
-                }
-            }
-        });
+        
 
         JButton btnSearch = new JButton("Search");
 
@@ -77,10 +71,31 @@ public class PharmacySearchWindow extends JFrame {
 
         JList<Pharmacy> lstReadersResult = new JList<Pharmacy>();
         lstReadersResult.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-        DefaultListModel<Pharmacy> model = new DefaultListModel<Pharmacy>();
+        model = new DefaultListModel<Pharmacy>();
         for(Pharmacy p : list){
         	model.addElement(p);
         }
+        
+        btnSearch.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String query = txtReaderName.getText();
+				List<Pharmacy> result = new ArrayList<Pharmacy>();
+				for(Pharmacy m : list){
+					if(m.getTitle().contains(query) || query.isEmpty() || query == null)
+						result.add(m);
+				}
+				model.removeAllElements();
+		        for(Pharmacy p : result){
+		            model.addElement(p);
+		        }
+		        //lstReadersResult.removeAll();
+		        //lstReadersResult.setModel(model);
+			}
+		});
+        
         
         button.addActionListener(new ActionListener() {
 			
@@ -88,7 +103,12 @@ public class PharmacySearchWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Pharmacy p = lstReadersResult.getSelectedValue();
-				new PharmacyDetailedInfoWindow(p).setVisible(true);
+				if(parent !=null){
+					parent.setPharmacy(p);
+					PharmacySearchWindow.this.dispose();
+				}
+				else
+					new PharmacyDetailedInfoWindow(p).setVisible(true);
 			}
 		});
         
