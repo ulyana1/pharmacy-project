@@ -89,8 +89,7 @@ public class UpdatePriceWindow extends JFrame{
             	UpdatePriceWindow.this.dispose();
             }
         });
-
-        
+ 
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
         	gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -108,13 +107,15 @@ public class UpdatePriceWindow extends JFrame{
         						.addComponent(txtId, 0, 0, Short.MAX_VALUE)))
         				.addGroup(gl_contentPane.createSequentialGroup()
         					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(btnOpenDrugList)
-        						)
-        					.addGap(18)
-        					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(btnClose, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-        			             )
-        					.addPreferredGap(ComponentPlacement.RELATED)))
+        						.addComponent(btnOpenDrugList,GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
+        				
+        				.addGroup(gl_contentPane.createSequentialGroup()
+            					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+            							.addComponent(btnClose, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+            				
+            					)
+        					
+        					)
         			.addGap(12))
         );
         gl_contentPane.setVerticalGroup(
@@ -137,7 +138,7 @@ public class UpdatePriceWindow extends JFrame{
         				)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnClose)
         				)
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
