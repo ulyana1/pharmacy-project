@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,8 +27,13 @@ public class AccountingWindow {
         initMainFrame(dbUtils);
     }
 
-    private void setFont() throws IOException, FontFormatException {
-        Font font = Font.createFont(Font.TRUETYPE_FONT, AccountingWindow.class.getClassLoader().getResourceAsStream("font.ttf"));
+    private void setFont() {
+        Font font = null;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/com/resources/font.ttf"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
         Font monteserrat = new Font("Montserrat", Font.PLAIN, 18);
         UIManager.put("Label.font", monteserrat);
@@ -35,20 +41,18 @@ public class AccountingWindow {
     }
 
     private void initMainFrame(DbUtils dbUtils) throws IOException, SQLException {
+        setFont();
         main = new JFrame();
 
         Container contentPane = main.getContentPane();
         content = new JPanel();
         GridBagLayout contentGridBagLayout = new GridBagLayout();
         content.setLayout(contentGridBagLayout);
-        content.setBorder(new EmptyBorder(60, 60, 60, 60));
+        content.setBorder(new EmptyBorder(10, 10, 10, 10));
         contentPane.add(content, BorderLayout.SOUTH);
         setUpContent(content, dbUtils, 0);
 
-        //main.setTitle("Бухгалтерія");
         main.pack();
-        //main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //main.setVisible(true);
     }
 
     private void setUpContent(JPanel content, DbUtils dbUtils, int activeMonth) throws IOException, SQLException {
@@ -69,6 +73,8 @@ public class AccountingWindow {
         while (summaryForPeriod.next()) {
             addPharmacy(content, i++, pharmacyImage, summaryForPeriod.getString("name"), summaryForPeriod.getDouble("revenues"), summaryForPeriod.getDouble("spendings"));
         }
+
+        addLogo(content);
     }
 
     private void addLogo(JPanel content) throws IOException {
@@ -84,7 +90,7 @@ public class AccountingWindow {
         periodBtnGbc.gridx = 0;
         periodBtnGbc.gridy = 1;
         periodBtnGbc.gridwidth = 999;
-        periodBtnGbc.insets = new Insets(60, 0, 50, 0);
+        periodBtnGbc.insets = new Insets(10, 0, 10, 0);
 
         for(int i = buttonsNum-1; i >= 0; i--) {
             Calendar calendar = Calendar.getInstance();
@@ -129,7 +135,7 @@ public class AccountingWindow {
         GridBagConstraints revenuesGbc = new GridBagConstraints();
         revenuesGbc.gridy = 4;
         revenuesGbc.gridwidth = 999;
-        revenuesGbc.insets = new Insets(55, 0, 15, 0);
+        revenuesGbc.insets = new Insets(25, 0, 15, 0);
         content.add(revenuesLabel, revenuesGbc);
 
         JLabel spendingsLabel = new JLabel("Витрати");
@@ -137,7 +143,7 @@ public class AccountingWindow {
         GridBagConstraints spendingsGbc = new GridBagConstraints();
         spendingsGbc.gridy = 6;
         spendingsGbc.gridwidth = 999;
-        spendingsGbc.insets = new Insets(15, 0, 15, 0);
+        spendingsGbc.insets = new Insets(5, 0, 5, 0);
         content.add(spendingsLabel, spendingsGbc);
 
         JLabel remainderLabel = new JLabel("Залишок");
@@ -145,7 +151,7 @@ public class AccountingWindow {
         GridBagConstraints remainderGbc = new GridBagConstraints();
         remainderGbc.gridy = 8;
         remainderGbc.gridwidth = 999;
-        remainderGbc.insets = new Insets(15, 0, 15, 0);
+        remainderGbc.insets = new Insets(5, 0, 5, 0);
         content.add(remainderLabel, remainderGbc);
     }
 
@@ -166,21 +172,21 @@ public class AccountingWindow {
         GridBagConstraints revenuesGbc = new GridBagConstraints();
         revenuesGbc.gridx = index;
         revenuesGbc.gridy = 5;
-        revenuesGbc.insets = new Insets(15, 15, 15, 15);
+        revenuesGbc.insets = new Insets(5, 15, 5, 15);
         content.add(revenuesLabel, revenuesGbc);
 
         JLabel spendingsLabel = new JLabel(spendings + " грн");
         GridBagConstraints spendingsGbc = new GridBagConstraints();
         spendingsGbc.gridx = index;
         spendingsGbc.gridy = 7;
-        spendingsGbc.insets = new Insets(15, 15, 15, 15);
+        spendingsGbc.insets = new Insets(5, 15, 5, 15);
         content.add(spendingsLabel, spendingsGbc);
 
         JLabel remainderLabel = new JLabel(revenues - spendings + " грн");
         GridBagConstraints remainderGbc = new GridBagConstraints();
         remainderGbc.gridx = index;
         remainderGbc.gridy = 9;
-        spendingsGbc.insets = new Insets(15, 15, 15, 15);
+        spendingsGbc.insets = new Insets(5, 15, 5, 15);
         content.add(remainderLabel, remainderGbc);
     }
 

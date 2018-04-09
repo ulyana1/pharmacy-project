@@ -140,17 +140,19 @@ public class PharmacyDataContext extends DataContext {
         
 		try {
 			Statement st = conn.createStatement();
-			String selTable = "SELECT id_purch as id, date, name, surname FROM  purchase "
+			String selTable = "SELECT id_purch as id, date, name, surname, pharm_title FROM  purchase "
 					+ "INNER JOIN patient ON purchase.id_patient=patient.id_patient "
-					+ "WHERE (id_pharmacy=" + pharmacyId + ")";
+					+ "INNER JOIN pharmacy ON purchase.id_pharmacy=pharmacy.id_pharmacy "
+					+ "WHERE (purchase.id_pharmacy=" + pharmacyId + ")";
 	           st.execute(selTable);
 	           ResultSet rs = st.getResultSet();
 	           while(rs.next()){
 		        	  int id = rs.getInt("id");
-		        	  Date date = rs.getDate("date");
-		        	  String patient = rs.getString("name") + " " + rs.getString("surname");
-		        	  List<PurchaseRecord> records = getPurchaseRecords(id);
-		        	  purchaseList.add(new Purchase(id, date,pharmacyId,0,patient,records));
+		        	  java.sql.Date date = rs.getDate("date");
+		        	  String patientName = rs.getString("name");
+		        	  String patientSurname = rs.getString("surname");
+		        	  String pharmacyTitle = rs.getString("pharm_title");
+		        	  purchaseList.add(new Purchase(id, date, pharmacyId, pharmacyTitle, patientName, patientSurname));
 	           }
 	       st.close();
 	    } 
