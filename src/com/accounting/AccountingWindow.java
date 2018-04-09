@@ -42,7 +42,7 @@ public class AccountingWindow {
         GridBagLayout contentGridBagLayout = new GridBagLayout();
         content.setLayout(contentGridBagLayout);
         content.setBorder(new EmptyBorder(60, 60, 60, 60));
-        contentPane.add(content);
+        contentPane.add(content, BorderLayout.SOUTH);
         setUpContent(content, dbUtils, 0);
 
         //main.setTitle("Бухгалтерія");
