@@ -1,5 +1,6 @@
 package com.pharmacy.views;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
@@ -18,6 +19,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Rectangle;
@@ -31,7 +34,8 @@ public class PatientFrame extends JFrame {
 	 * Create the panel.
 	 * @param patient 
 	 */
-
+	private PurchaseData db_purch;
+	private JFrame frame;
 	
 	public PatientFrame() {
 		setTitle("Patients");
@@ -171,21 +175,21 @@ public class PatientFrame extends JFrame {
   		});
   		add.add(addPatient);
   		
-  		JMenuItem addPurchase = new JMenuItem("\u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u043A\u0443\u043F\u043A\u0443");
-  		addPurchase.addActionListener(new ActionListener() {
-//  			public void actionPerformed(ActionEvent e) {
-//  				dispose();
-//  				AddPurchaseFrame addPurchFrame = new AddPurchaseFrame();
-//  				addPurchFrame.setVisible(true);
-//  			}
-  			@Override
-            public void actionPerformed(ActionEvent e) {
-  				dispose();
-                new AddPurchaseFrame(patientContext.getAllPatientsNames()).setVisible(true);
-//              new PharmacySearchWindow(pharmacyContext.getAllPharmacies()).setVisible(true);
-            }
-  		});
-  		add.add(addPurchase);
+  		JButton btnAddPurchase = new JButton("Add purchase");
+		btnAddPurchase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AddPurchaseFrame dialog = new AddPurchaseFrame(frame, db_purch, true);
+				dialog.addComponentListener(new ComponentAdapter() {
+					public void componentHidden(ComponentEvent e) 
+					{
+						//searchPrescriptions();
+					}
+				});
+				dialog.setVisible(true);
+			}
+		});
+		btnAddPurchase.setBounds(320, 11, 107, 23);
+		add.add(btnAddPurchase);
   		//=================== Menu ========================
 
 

@@ -189,15 +189,7 @@ public class SearchPatient extends JFrame {
   		});
   		add.add(addPatient);
   		
-  		JMenuItem addPurchase = new JMenuItem("\u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u043A\u0443\u043F\u043A\u0443");
-  		addPurchase.addActionListener(new ActionListener() {
-  			public void actionPerformed(ActionEvent e) {
-  				dispose();
-  				AddPurchaseFrame addPurchFrame = new AddPurchaseFrame();
-  				addPurchFrame.setVisible(true);
-  			}
-  		});
-  		add.add(addPurchase);
+  		
   		//=================== Menu ========================
   		
   		txtReaderName = new JTextField("Search patient");

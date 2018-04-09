@@ -19,8 +19,8 @@ public class AccountingWindow {
     private static final String DB_HOST = "localhost";
     private static final String DB_NAME = "pharmacy_db";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "";
-    private static final String[] MONTHS = {"Ð¡Ñ–Ñ‡ÐµÐ½ÑŒ", "Ð›ÑŽÑ‚Ð¸Ð¹", "Ð‘ÐµÑ€ÐµÐ·ÐµÐ½ÑŒ", "ÐšÐ²Ñ–Ñ‚ÐµÐ½ÑŒ", "Ð¢Ñ€Ð°Ð²ÐµÐ½ÑŒ", "Ð§ÐµÑ€Ð²ÐµÐ½ÑŒ", "Ð›Ð¸Ð¿ÐµÐ½ÑŒ", "Ð¡ÐµÑ€Ð¿ÐµÐ½ÑŒ", "Ð’ÐµÑ€ÐµÑ�ÐµÐ½ÑŒ", "Ð–Ð¾Ð²Ñ‚ÐµÐ½ÑŒ", "Ð›Ð¸Ñ�Ñ‚Ð¾Ð¿Ð°Ð´", "Ð“Ñ€ÑƒÐ´ÐµÐ½ÑŒ"};
+    private static final String PASSWORD = "1111";
+    private static final String[] MONTHS = {"Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"};
 
     public AccountingWindow() throws IOException, SQLException, ClassNotFoundException, FontFormatException {
         DbUtils dbUtils = new DbUtils();

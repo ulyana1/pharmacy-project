@@ -46,6 +46,7 @@ public class MainWindow {
 	TesterMedicine medicineView;
 
 	private DoctorDataContext db;
+	private PurchaseData db_purch;
 	private int doctorsSortBy = 1;
 	private boolean doctorsSortAsc = true;
 	private int prescriptionsSortBy = 1;
@@ -380,13 +381,18 @@ public class MainWindow {
 		btnAddpatient.setBounds(221, 11, 89, 23);
 		patientsPanel.add(btnAddpatient);
 		
-		JButton btnAddPurchase = new JButton("Add Purchase");
+		JButton btnAddPurchase = new JButton("Add purchase");
 		btnAddPurchase.addActionListener(new ActionListener() {
-			@Override
-	        public void actionPerformed(ActionEvent e) {
-	            new AddPurchaseFrame(patientContext.getAllPatientsNames()).setVisible(true);
-	          //new PharmacySearchWindow(pharmacyContext.getAllPharmacies()).setVisible(true);
-	        }
+			public void actionPerformed(ActionEvent arg0) {
+				AddPurchaseFrame dialog = new AddPurchaseFrame();
+				dialog.addComponentListener(new ComponentAdapter() {
+					public void componentHidden(ComponentEvent e) 
+					{
+						searchPrescriptions();
+					}
+				});
+				dialog.setVisible(true);
+			}
 		});
 		btnAddPurchase.setBounds(320, 11, 107, 23);
 		patientsPanel.add(btnAddPurchase);

@@ -169,23 +169,7 @@ public class TableDataViewWindow<T> extends JFrame {
       		});
       		add.add(addPatient);
       		
-      		JMenuItem addPurchase = new JMenuItem("\u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u043A\u0443\u043F\u043A\u0443");
-      		addPurchase.addActionListener(new ActionListener() {
-//      			public void actionPerformed(ActionEvent e) {
-//      				dispose();
-//      				AddPurchaseFrame addPurchFrame = new AddPurchaseFrame();
-//      				addPurchFrame.setVisible(true);
-//      			}
-      			@Override
-                public void actionPerformed(ActionEvent e) {
-      				dispose();
-                    new AddPurchaseFrame(patientContext.getAllPatients()).setVisible(true);
-//                    for(Patient p : patientContext.getAllPatients()){
-//                    	System.out.println(p);
-//                    }
-                }
-      		});
-      		add.add(addPurchase);
+      		
       		//=================== Menu ========================
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

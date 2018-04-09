@@ -16,8 +16,16 @@ public class Purchase {
 	private String pharm_title;
 	private String name;
 	private String surname;
+	private String date2;
+	private String prescr_id;
+	private String pharmacy;
+	private String patient;
 
-	public Purchase() {
+	public Purchase(String date2, String prescr_id, String pharmacy, String patient) {
+		this.date2 = date2;
+		this.prescr_id = prescr_id;
+		this.pharmacy = pharmacy;
+		this.patient = patient;
 	}
 	
 	public Purchase(int id_purch, Date date, int id_pharmacy, int id_prescr, int id_patient) {

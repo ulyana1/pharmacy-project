@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -28,12 +30,14 @@ import com.pharmacy.view.elements.CustomTableModel.TableSelectionEventHandler;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 
 public class PurchaseFrame extends JFrame {
 
 	private JPanel contentPane;
-
+	private PurchaseData db_purch;
+	private JFrame frame;
 	/**
 	 * Launch the application.
 	 
@@ -198,23 +202,21 @@ public class PurchaseFrame extends JFrame {
   		});
   		add.add(addPatient);
   		
-  		JMenuItem addPurchase = new JMenuItem("\u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u043A\u0443\u043F\u043A\u0443");
-  		addPurchase.addActionListener(new ActionListener() {
-//  			public void actionPerformed(ActionEvent e) {
-//  				dispose();
-//  				AddPurchaseFrame addPurchFrame = new AddPurchaseFrame();
-//  				addPurchFrame.setVisible(true);
-//  			}
-  			@Override
-            public void actionPerformed(ActionEvent e) {
-  				dispose();
-                new AddPurchaseFrame(patientContext.getAllPatients()).setVisible(true);
-//                for(Patient p : patientContext.getAllPatients()){
-//                	System.out.println(p);
-//                }
-            }
-  		});
-  		add.add(addPurchase);
+  		JButton btnAddPurchase = new JButton("Add purchase");
+		btnAddPurchase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AddPurchaseFrame dialog = new AddPurchaseFrame(frame, db_purch, true);
+				dialog.addComponentListener(new ComponentAdapter() {
+					public void componentHidden(ComponentEvent e) 
+					{
+						//searchPrescriptions();
+					}
+				});
+				dialog.setVisible(true);
+			}
+		});
+		btnAddPurchase.setBounds(320, 11, 107, 23);
+		add.add(btnAddPurchase);
   		//=================== Menu ========================
 
 	}

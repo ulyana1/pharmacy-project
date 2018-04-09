@@ -9,7 +9,7 @@ public abstract class DBconfig {
 	private String dbname = "pharmacy_db";
 	private Connection conn;
 	private String user = "root";
-	private String passwd = "Alina_DB";
+	private String passwd = "1111";
 	public DBconfig(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
