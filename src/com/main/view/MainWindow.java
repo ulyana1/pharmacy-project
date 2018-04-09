@@ -1,5 +1,6 @@
 package com.main.view;
 import java.awt.EventQueue;
+import java.awt.FontFormatException;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
@@ -9,12 +10,14 @@ import java.awt.BorderLayout;
 import net.proteanit.sql.DbUtils;
 
 import java.awt.event.*;
-
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.accounting.AccountingWindow;
 import com.doctor.view.EditDoctor;
 import com.doctor.view.EditPrescription;
 import com.medicine.view.TesterMedicine;
@@ -380,40 +383,27 @@ public class MainWindow {
 		
 		JButton btnAddPurchase = new JButton("Add Purchase");
 		btnAddPurchase.addActionListener(new ActionListener() {
-//			
 			@Override
-        public void actionPerformed(ActionEvent e) {
-            new AddPurchaseFrame(patientContext.getAllPatientsNames()).setVisible(true);
-//          new PharmacySearchWindow(pharmacyContext.getAllPharmacies()).setVisible(true);
-        }
+	        public void actionPerformed(ActionEvent e) {
+	            new AddPurchaseFrame(patientContext.getAllPatientsNames()).setVisible(true);
+	          //new PharmacySearchWindow(pharmacyContext.getAllPharmacies()).setVisible(true);
+	        }
 		});
 		btnAddPurchase.setBounds(320, 11, 107, 23);
 		patientsPanel.add(btnAddPurchase);
 		
 		updateSpecialitiesList();
 
-//		tabbedPane.addTab("Pharmacies", pharmacyView.contentPane);
-//		tabbedPane.addTab("Medicine", medicineView.contentPane);
-////
-////		JButton btnOpenPatients = new JButton("Open Patients window");
-////		btnAddNew.addActionListener(new ActionListener() {
-////			public void actionPerformed(ActionEvent arg0) {
-////				patientsWindow.setVisible(true);
-////			}
-////		});
-////		prescriptionsPanel.add(btnAddNew);
-//
-//		CustomTableModel.TableSelectionEventHandler<Patient> selectionHandler = new TableSelectionEventHandler<Patient>(){
-//            @Override
-//            public void handle(Patient object, int row) {
-//                new CurrentPatientFrame(object).setVisible(true);
-//            }
-//        };
-//
-//		MainFrame patientsWindow = new MainFrame();
-//        List<Patient> ptlist = patientsWindow.patientContext.getAllPatients();
-//        TableDataViewWindow<Patient> patientsView = new TableDataViewWindow<>(Patient.class, ptlist, selectionHandler);
-//		tabbedPane.addTab("Patients", patientsView.getContentPane());
+		tabbedPane.addTab("Pharmacies", pharmacyView.contentPane);
+		tabbedPane.addTab("Medicine", medicineView.contentPane);
+		
+		AccountingWindow accountingWindow;
+		try {
+			accountingWindow = new AccountingWindow();
+			tabbedPane.addTab("Accounting", accountingWindow.content);
+		} catch (ClassNotFoundException | IOException | SQLException | FontFormatException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	private void changeDoctorsSortBy(int colName) {
