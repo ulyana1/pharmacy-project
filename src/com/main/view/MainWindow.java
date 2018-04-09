@@ -21,6 +21,7 @@ import com.accounting.AccountingWindow;
 import com.doctor.view.EditDoctor;
 import com.doctor.view.EditPrescription;
 import com.medicine.view.TesterMedicine;
+import com.pharmacy.data.DoctorDataContext;
 import com.pharmacy.data.PatientData;
 import com.pharmacy.data.PrescrData;
 import com.pharmacy.data.PurchaseData;
@@ -39,14 +40,12 @@ import com.pharmacy.views.PurchaseFrame;
 import com.pharmacy.views.TableDataViewWindow;
 import com.toedter.calendar.JDateChooser;
 
-import connection.MySqlConnection;
-
 public class MainWindow {
 	
 	TestMainFrame pharmacyView;
 	TesterMedicine medicineView;
 
-	private MySqlConnection db;
+	private DoctorDataContext db;
 	private int doctorsSortBy = 1;
 	private boolean doctorsSortAsc = true;
 	private int prescriptionsSortBy = 1;
@@ -88,7 +87,7 @@ public class MainWindow {
 	 * Create the application.
 	 */
 	public MainWindow() {
-		db = new MySqlConnection();
+		db = new DoctorDataContext();
 		pharmacyView = new TestMainFrame();
 		medicineView = new TesterMedicine(); 
 		initialize();

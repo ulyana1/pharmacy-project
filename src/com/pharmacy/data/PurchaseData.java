@@ -9,10 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pharmacy.config.DBconfig;
 import com.pharmacy.entities.Purchase;
 
-public class PurchaseData extends DBconfig {
+public class PurchaseData extends DataContext {
 	
 	private static PurchaseData context = new PurchaseData();
 	

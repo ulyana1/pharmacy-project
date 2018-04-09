@@ -21,7 +21,7 @@ public class Medicine {
 		this.quantityPerBox = quantityPerBox;
 	}
 	
-	@TableColumn(name="id")
+	@TableColumn(name="id", number = 1)
 	public int getId(){
 		return id;
 	}
@@ -31,12 +31,12 @@ public class Medicine {
 		return this;
 	}	
 
-	@TableColumn(name = "Title")
+	@TableColumn(name = "Title", number = 2)
 	public String getTitle(){
 		return title;
 	}
 	
-	@TableColumn(name = "producer")
+	@TableColumn(name = "producer", number = 3)
 	public String getProducer(){
 		return producer;
 	}
@@ -46,7 +46,7 @@ public class Medicine {
 		return this;
 	}
 
-	@TableColumn(name = "box price")
+	@TableColumn(name = "box price", number = 4)
 	public double getBoxPrice(){
 		return boxPrice;
 	}
@@ -56,7 +56,7 @@ public class Medicine {
 		return this;
 	}
 
-	@TableColumn(name = "quantity per box")
+	@TableColumn(name = "quantity per box", number = 5)
 	public int getQuantityPerBox(){
 		return quantityPerBox;
 	}

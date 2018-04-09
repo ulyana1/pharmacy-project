@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.NumberFormatter;
 
-import connection.MySqlConnection;
+import com.pharmacy.data.DoctorDataContext;
 
 public class EditDoctor extends JDialog {
 
@@ -21,7 +21,7 @@ public class EditDoctor extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditDoctor(Frame owner, MySqlConnection db, boolean addMode) {
+	public EditDoctor(Frame owner, DoctorDataContext db, boolean addMode) {
 		super(owner, true);
 		setTitle("Add doctor");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

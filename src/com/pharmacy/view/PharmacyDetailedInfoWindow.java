@@ -70,8 +70,8 @@ public class PharmacyDetailedInfoWindow extends JFrame {
 
                     @Override
                     public void handle(Medicine object, int row) {
-                    	List<Medicine> medsList = MedicineDataContext.getInstance().getMedBalance(object.getId());
-                    	new TableDataViewWindow<>(Medicine.class, medsList, null).setVisible(true);
+                    	//List<Medicine> medsList = MedicineDataContext.getInstance().getMedBalance(object.getId());
+                    	//new TableDataViewWindow<>(Medicine.class, medsList, null).setVisible(true);
                     }                    
                 };
                 List<Medicine> medsList = MedicineDataContext.getInstance().getMedBalance(pharmacy.getId());
@@ -109,18 +109,18 @@ public class PharmacyDetailedInfoWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				CustomTableModel.TableSelectionEventHandler<Purchase> selectionHandler = new TableSelectionEventHandler<Purchase>() {
+				CustomTableModel.TableSelectionEventHandler<Purchase2> selectionHandler = new TableSelectionEventHandler<Purchase2>() {
 
                     @Override
-                    public void handle(Purchase object, int row) {
-                    	List<PurchaseRecord> purchaseRecordList = PharmacyDataContext.getInstance().getPurchaseRecords(object.getId_purch());
+                    public void handle(Purchase2 object, int row) {
+                    	List<PurchaseRecord> purchaseRecordList = object.getPurchaseList();
                     	new TableDataViewWindow<>(PurchaseRecord.class, purchaseRecordList, null).setVisible(true);
                     }
                     
                 };
 				
-				List<Purchase> purchaseList = PharmacyDataContext.getInstance().getPurchaseHistory(pharmacy.getId());
-				new TableDataViewWindow<>(Purchase.class, purchaseList, selectionHandler).setVisible(true);
+				List<Purchase2> purchaseList = PharmacyDataContext.getInstance().getPurchaseHistory(pharmacy.getId());
+				new TableDataViewWindow<>(Purchase2.class, purchaseList, selectionHandler).setVisible(true);
 			}
 		});
         

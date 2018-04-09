@@ -33,7 +33,11 @@ public class MedicineSearchWindow extends JFrame{
     
     public MedicineSearchWindow(List<Medicine> meds) {
     	list = meds;
-        setTitle("Search medicine");
+        init();
+    }
+    
+    private void init(){
+    	setTitle("Search medicine");
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 415, 238);

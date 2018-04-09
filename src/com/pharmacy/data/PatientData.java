@@ -11,10 +11,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Date;
 
-import com.pharmacy.config.DBconfig;
 import com.pharmacy.entities.Patient;
 
-public class PatientData extends DBconfig {
+public class PatientData extends DataContext {
 	
 	private static PatientData context = new PatientData();
 	

@@ -20,10 +20,10 @@ public class AccountingWindow {
     private static final String DB_NAME = "pharmacy_db";
     private static final String USER_NAME = "root";
     private static final String PASSWORD = "";
-    private static final String[] MONTHS = {"Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"};
+    private static final String[] MONTHS = {"Ð¡Ñ–Ñ‡ÐµÐ½ÑŒ", "Ð›ÑŽÑ‚Ð¸Ð¹", "Ð‘ÐµÑ€ÐµÐ·ÐµÐ½ÑŒ", "ÐšÐ²Ñ–Ñ‚ÐµÐ½ÑŒ", "Ð¢Ñ€Ð°Ð²ÐµÐ½ÑŒ", "Ð§ÐµÑ€Ð²ÐµÐ½ÑŒ", "Ð›Ð¸Ð¿ÐµÐ½ÑŒ", "Ð¡ÐµÑ€Ð¿ÐµÐ½ÑŒ", "Ð’ÐµÑ€ÐµÑ�ÐµÐ½ÑŒ", "Ð–Ð¾Ð²Ñ‚ÐµÐ½ÑŒ", "Ð›Ð¸Ñ�Ñ‚Ð¾Ð¿Ð°Ð´", "Ð“Ñ€ÑƒÐ´ÐµÐ½ÑŒ"};
 
     public AccountingWindow() throws IOException, SQLException, ClassNotFoundException, FontFormatException {
-        DbUtils dbUtils = new DbUtils(DB_HOST, DB_NAME, USER_NAME, PASSWORD);
+        DbUtils dbUtils = new DbUtils();
         initMainFrame(dbUtils);
     }
 
@@ -130,7 +130,7 @@ public class AccountingWindow {
     private void addSections(JPanel content) {
         Font montesseratBold = new Font("Montesserat", Font.BOLD, 18);
 
-        JLabel revenuesLabel = new JLabel("Доходи");
+        JLabel revenuesLabel = new JLabel("revenues");
         revenuesLabel.setFont(montesseratBold);
         GridBagConstraints revenuesGbc = new GridBagConstraints();
         revenuesGbc.gridy = 4;
@@ -138,7 +138,7 @@ public class AccountingWindow {
         revenuesGbc.insets = new Insets(25, 0, 15, 0);
         content.add(revenuesLabel, revenuesGbc);
 
-        JLabel spendingsLabel = new JLabel("Витрати");
+        JLabel spendingsLabel = new JLabel("spendings");
         spendingsLabel.setFont(montesseratBold);
         GridBagConstraints spendingsGbc = new GridBagConstraints();
         spendingsGbc.gridy = 6;
@@ -146,7 +146,7 @@ public class AccountingWindow {
         spendingsGbc.insets = new Insets(5, 0, 5, 0);
         content.add(spendingsLabel, spendingsGbc);
 
-        JLabel remainderLabel = new JLabel("Залишок");
+        JLabel remainderLabel = new JLabel("remainder");
         remainderLabel.setFont(montesseratBold);
         GridBagConstraints remainderGbc = new GridBagConstraints();
         remainderGbc.gridy = 8;
@@ -168,21 +168,21 @@ public class AccountingWindow {
         nameGbc.gridy = 3;
         content.add(nameLabel, nameGbc);
 
-        JLabel revenuesLabel = new JLabel(revenues + " грн");
+        JLabel revenuesLabel = new JLabel(revenues + " uah");
         GridBagConstraints revenuesGbc = new GridBagConstraints();
         revenuesGbc.gridx = index;
         revenuesGbc.gridy = 5;
         revenuesGbc.insets = new Insets(5, 15, 5, 15);
         content.add(revenuesLabel, revenuesGbc);
 
-        JLabel spendingsLabel = new JLabel(spendings + " грн");
+        JLabel spendingsLabel = new JLabel(spendings + " uah");
         GridBagConstraints spendingsGbc = new GridBagConstraints();
         spendingsGbc.gridx = index;
         spendingsGbc.gridy = 7;
         spendingsGbc.insets = new Insets(5, 15, 5, 15);
         content.add(spendingsLabel, spendingsGbc);
 
-        JLabel remainderLabel = new JLabel(revenues - spendings + " грн");
+        JLabel remainderLabel = new JLabel(revenues - spendings + " uah");
         GridBagConstraints remainderGbc = new GridBagConstraints();
         remainderGbc.gridx = index;
         remainderGbc.gridy = 9;

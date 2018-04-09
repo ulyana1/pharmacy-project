@@ -9,10 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pharmacy.config.DBconfig;
 import com.pharmacy.entities.Prescription;
 
-public class PrescrData extends DBconfig {
+public class PrescrData extends DataContext {
 	
 	private static PrescrData context = new PrescrData();
 	

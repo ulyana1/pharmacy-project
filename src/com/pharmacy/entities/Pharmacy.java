@@ -14,7 +14,7 @@ public class Pharmacy {
 		this.address = address;
 	}
 	
-	@TableColumn(name = "Id")
+	@TableColumn(name = "Id",number=1)
 	public int getId(){
 		return id;
 	}
@@ -25,7 +25,7 @@ public class Pharmacy {
 	}
 	
 
-	@TableColumn(name = "Title")
+	@TableColumn(name = "Title", number = 2)
 	public String getTitle(){
 		return title;
 	}
@@ -35,7 +35,7 @@ public class Pharmacy {
 		return this;
 	}
 
-	@TableColumn(name = "Address")
+	@TableColumn(name = "Address", number = 3)
 	public String getAddress(){
 		return address;
 	}
