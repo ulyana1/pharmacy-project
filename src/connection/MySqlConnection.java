@@ -17,7 +17,7 @@ public class MySqlConnection {
 	final private String host = "localhost:3306";
 	final private String databaseName = "pharmacy_db";
 	final private String user = "root";
-	final private String password = "";
+	final private String password = "Alina_DB";
 	 
 	public MySqlConnection() {
 		try {

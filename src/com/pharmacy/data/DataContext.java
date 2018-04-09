@@ -11,7 +11,7 @@ public abstract class DataContext {
 	private Connection conn;
 	private Class driver;
 	private String user = "root";
-	private String passwd = "";
+	private String passwd = "Alina_DB";
 	public DataContext(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 

@@ -12,6 +12,7 @@ import java.util.Date;
 import com.pharmacy.entities.Delivery;
 import com.pharmacy.entities.DeliveryRecord;
 import com.pharmacy.entities.Medicine;
+import com.pharmacy.entities.MedicineChangeRecord;
 import com.pharmacy.entities.Pharmacy;
 import com.pharmacy.entities.Purchase;
 import com.pharmacy.entities.PurchaseRecord;
@@ -163,6 +164,7 @@ public class MedicineDataContext extends DataContext{
 		
 		try {
 			Statement st = conn.createStatement();
+			
 			String selTable = "SELECT distinct medicine.id_medicine, title, producer, pharmacy_medicine.pack_price, quantity_per_box " + 
                     "FROM medicine " +
                     "INNER JOIN pharmacy_medicine " + 
@@ -171,7 +173,14 @@ public class MedicineDataContext extends DataContext{
                     "ON pharmacy.id_pharmacy = pharmacy_medicine.id_pharmacy " + 
                     "WHERE pharmacy.id_pharmacy IN (SELECT id_pharmacy " + 
                                                    "FROM pharmacy " + 
+			
 					  "WHERE id_pharmacy = '" + pharmID + "' );";
+			/*
+			String chngQuery = "SELECT * "
+					+ "FROM (SELECT id_pharmacy, id_medicine, Max(date_of_change) as date_of_change "
+					+ "FROM pharmacy_db.pharmacy_medicine GROUP BY id_pharmacy, id_medicine) md"
+					+ "INNER JOIN pharmacy_db.pharmacy_medicine USING(id_pharmacy, id_medicine, date_of_change)"
+					+ "WHERE id_pharmacy=" + pharmID + ";";*/
 	           st.execute(selTable);
 	           ResultSet rs = st.getResultSet();
 	           while(rs.next()){
@@ -188,7 +197,46 @@ public class MedicineDataContext extends DataContext{
 			e.printStackTrace();
 		}
         return medicine;	
-	} 
+	  } 
+	
+
+	public List<MedicineChangeRecord> getPriceHistory(int pharmID) {
+		Connection conn = getConnection();
+		List<MedicineChangeRecord> medicine = new ArrayList<MedicineChangeRecord>();
+		
+		try {
+			Statement st = conn.createStatement();	
+			
+			String chngQuery = "SELECT distinct medicine.id_medicine, title, producer, pharmacy_medicine.pack_price, date_of_change "
+					+ "FROM pharmacy_db.pharmacy_medicine "
+					+ "INNER JOIN pharmacy_db.medicine  "
+					+ "ON medicine.id_medicine = pharmacy_medicine.id_medicine  "
+					+ "INNER JOIN pharmacy_db.pharmacy "
+					+ "ON pharmacy.id_pharmacy = pharmacy_medicine.id_pharmacy "
+					+ "WHERE pharmacy.id_pharmacy IN (SELECT id_pharmacy "
+					+ "FROM pharmacy_db.pharmacy "
+					+ "WHERE id_pharmacy = "+ pharmID +");";
+			
+	           st.execute(chngQuery);
+	           ResultSet rs = st.getResultSet();
+	           while(rs.next()){
+		        	  int id = rs.getInt("id_medicine");
+		        	  String title = rs.getString("title");
+		        	  String producer = rs.getString("producer");
+		        	  double box_price = rs.getDouble("pharmacy_medicine.pack_price");
+		        	  //int quantity_per_box = rs.getInt("quantity_per_box");
+		        	  Date dateOfChange = rs.getDate("date_of_change");
+		        	  medicine.add(new MedicineChangeRecord(id, title, producer, box_price, dateOfChange));	  
+	           }
+	       st.close();
+	    } 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return medicine;	
+	}
+	
+	
 	} 
 	
 
