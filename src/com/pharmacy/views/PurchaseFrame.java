@@ -201,22 +201,6 @@ public class PurchaseFrame extends JFrame {
   			}
   		});
   		add.add(addPatient);
-  		
-  		JButton btnAddPurchase = new JButton("Add purchase");
-		btnAddPurchase.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AddPurchaseFrame dialog = new AddPurchaseFrame(frame, db_purch, true);
-				dialog.addComponentListener(new ComponentAdapter() {
-					public void componentHidden(ComponentEvent e) 
-					{
-						//searchPrescriptions();
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
-		btnAddPurchase.setBounds(320, 11, 107, 23);
-		add.add(btnAddPurchase);
   		//=================== Menu ========================
 
 	}
